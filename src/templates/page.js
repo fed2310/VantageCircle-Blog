@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
-import { Layout } from '../components/common'
+import { Layout, PostCard, Podcasts } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 /**
@@ -13,8 +13,11 @@ import { MetaData } from '../components/common/meta'
 *
 */
 const Page = ({ data, location }) => {
-    const page = data.ghostPage
+    console.log(data)
+    console.log(location.pathname)
 
+    const posts = data.allGhostPost.edges
+    const page = data.ghostPage
     return (
         <>
             <MetaData
@@ -37,6 +40,7 @@ const Page = ({ data, location }) => {
                         />
                     </article>
                 </div>
+                
             </Layout>
         </>
     )
@@ -60,6 +64,16 @@ export const postQuery = graphql`
     query($slug: String!) {
         ghostPage(slug: { eq: $slug }) {
             ...GhostPageFields
+        }
+        allGhostPost(
+            sort: { order: DESC, fields: [published_at] },
+            filter: {tags: {elemMatch: {name: {eq: "#Podcasts"}}}},
+        ) {
+            edges {
+                node {
+                ...GhostPostFields
+                }
+            }
         }
     }
 `

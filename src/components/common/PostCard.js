@@ -1,40 +1,37 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-import { Tags } from '@tryghost/helpers-gatsby'
+// import { Tags } from '@tryghost/helpers-gatsby'
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 
 const PostCard = ({ post }) => {
     const url = `/${post.slug}/`
+    const tag = `/tag/${post.tags[0].slug}/`
     const readingTime = readingTimeHelper(post)
-
+    console.log(post)
     return (
-        <Link to={url} className="post-card">
-            <header className="post-card-header">
-                {post.feature_image &&
-                    <div className="post-card-image" style={{
-                        backgroundImage: `url(${post.feature_image})` ,
-                    }}></div>}
-                {post.tags && <div className="post-card-tags"> <Tags post={post} visibility="public" autolink={false} /></div>}
-                {post.featured && <span>Featured</span>}
-                <h2 className="post-card-title">{post.title}</h2>
-            </header>
-            <section className="post-card-excerpt">{post.excerpt}</section>
-            <footer className="post-card-footer">
-                <div className="post-card-footer-left">
-                    <div className="post-card-avatar">
-                        {post.primary_author.profile_image ?
-                            <img className="author-profile-image" src={post.primary_author.profile_image} alt={post.primary_author.name}/> :
-                            <img className="default-avatar" src="/images/icons/avatar.svg" alt={post.primary_author.name}/>
-                        }
+        <article className="post">
+            <div className="post-inner-content">
+                <div className="img-holder">
+                    <a href={url} className="featured-image" title={ post.title}>
+                        <img className="img-responsive" src={ post.feature_image } alt={ post.title}/>
+                    </a>
+                </div>
+
+                <div className="inner">
+                    {post.tags && <div className="tags"><Link to={tag}>{ post.tags[0].name }</Link></div>}
+                    <h2 className="post-title"><a href={url} title={ post.title }> { post.title }</a></h2> 
+                    <a href={url} className="excerpt" title={ post.title }>
+                        { post.excerpt }
+                    </a>
+                    <div className="readtime_wrapper hidden-sm hidden-xs">
+                        <div className="tags">{ post.updated_at_pretty } &nbsp;&nbsp;|&nbsp;&nbsp;</div>
+                        <div className="readtime">{ readingTime }</div>
                     </div>
-                    <span>{ post.primary_author.name }</span>
                 </div>
-                <div className="post-card-footer-right">
-                    <div>{readingTime}</div>
-                </div>
-            </footer>
-        </Link>
+
+            </div>
+        </article>           
     )
 }
 

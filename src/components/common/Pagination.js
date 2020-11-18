@@ -3,24 +3,41 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
 const Pagination = ({ pageContext }) => {
+    console.log(pageContext)
     const { previousPagePath, nextPagePath, humanPageNumber, numberOfPages } = pageContext
+    const prevPageUrl = `${previousPagePath}/`
+    const nextPageUrl = `${nextPagePath}/`
+
 
     return (
-        <nav className="pagination" role="navigation">
+        <nav className="pagination mrauto" role="navigation">
             <div>
-                {previousPagePath && (
+                {prevPageUrl && (
 
-                    <Link to={previousPagePath} rel="prev">
+                    <Link to={prevPageUrl} rel="prev" className="previouscss ">
                             Previous
                     </Link>
 
                 )}
             </div>
-            {numberOfPages > 1 && <div className="pagination-location">Page {humanPageNumber} of {numberOfPages}</div>}
+            <div className="page-selection">
+                {numberOfPages > 1 && <button className="pagination-location" onClick={openList}>Page {humanPageNumber}/{numberOfPages}</button>}
+                <div className="page-dropdown" id="page-dropdown">
+                    <ul className="pagination-list">      
+                        {Array.from({ length: numberOfPages }, (_, i) => (
+                            <li key={`pagination-number${i + 1}`}>
+                                <Link  to={i==0 ? "/" : `/page/${i + 1 }/`}  >
+                                    {i + 1}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
             <div>
-                {nextPagePath && (
+                {nextPageUrl && (
 
-                    <Link to={nextPagePath} rel="next">
+                    <Link to={nextPageUrl} rel="next" className="previouscssnext">
                             Next
                     </Link>
                 )}
@@ -31,6 +48,10 @@ const Pagination = ({ pageContext }) => {
 
 Pagination.propTypes = {
     pageContext: PropTypes.object.isRequired,
+}
+
+function openList(){
+    document.getElementById(`page-dropdown`).classList.add(`open-dropdown`)   
 }
 
 export default Pagination

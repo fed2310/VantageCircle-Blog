@@ -24,16 +24,18 @@ const Tag = ({ data, location, pageContext }) => {
             />
             <Layout>
                 <div className="container">
-                    <header className="tag-header">
+                    <div className="tag-header">
                         <h1>{tag.name}</h1>
                         {tag.description ? <p>{tag.description}</p> : null }
-                    </header>
-                    <section className="post-feed">
+                    </div>
+                    <div className="row loop">
                         {posts.map(({ node }) => (
                             // The tag below includes the markup for each post - components/common/PostCard.js
-                            <PostCard key={node.id} post={node} />
+                            <div className="col-md-6 col-lg-4 item">
+                                <PostCard key={node.id} post={node} />
+                            </div>
                         ))}
-                    </section>
+                    </div>
                     <Pagination pageContext={pageContext} />
                 </div>
             </Layout>

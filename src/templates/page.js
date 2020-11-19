@@ -31,27 +31,26 @@ const Page = ({ data, location }) => {
                 <style type="text/css">{`${page.codeinjection_styles}`}</style>
             </Helmet>
             <Layout>
-                <div className="main-container">
-                    <div className="content-inner">
-                        <article className="content tag text-center">
-                            <h1 className="content-title">{page.title}</h1>
 
-                            {/* The main page content */}
-                            <section
-                                className="content-body load-external-scripts"
-                                dangerouslySetInnerHTML={{ __html: page.html }}
-                            />
-                        </article>
-                        {location.pathname === '/podcasts/' || location.pathname === '/podcasts' ? 
-                            <div className="row loop">
-                                {posts.map(({ node }) => (
-                                    <div className="col-12 item">
-                                        <Podcasts key={node.id} post={node} />
-                                    </div>
-                                ))}
-                            </div> : null 
-                        }
-                    </div>
+                <div className="content-inner">
+                    <article className="content tag text-center">
+                        <h1 className="content-title">{page.title}</h1>
+
+                        {/* The main page content */}
+                        <section
+                            className="content-body load-external-scripts"
+                            dangerouslySetInnerHTML={{ __html: page.html }}
+                        />
+                    </article>
+                    {location.pathname === '/podcasts/' || location.pathname === '/podcasts' ? 
+                        <div className="row loop">
+                            {posts.map(({ node }) => (
+                                <div className="col-12 item">
+                                    <Podcasts key={node.id} post={node} />
+                                </div>
+                            ))}
+                        </div> : null 
+                    }
                 </div>
                 
             </Layout>

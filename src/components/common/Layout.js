@@ -220,9 +220,15 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                                 </div>
                             </div>
                         </main> :
-                        <main id="content" className="blog-content-container container-top" role="main">  
-                            <div className="single-blog-post">
-                                {children}
+                        <main id="content" className="main-container" role="main">  
+                            <div className="blog-content-container container-top">
+                                <div id="content" className="single-blog-post">
+                                    <div className="row loop">
+                                        <div className="col-12">
+                                            {children}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </main>
                     }

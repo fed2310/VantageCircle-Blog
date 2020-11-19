@@ -1,7 +1,7 @@
 {
   "development": {
-    "apiUrl": "https://vantagecircle.ghost.io",
-    "contentApiKey": "035ae7fb3097139833e66054a6"
+    "apiUrl": "http://localhost:2368",
+    "contentApiKey": "349faa9d0428863fd58a22ded3"
   },
   "production": {
     "apiUrl": "https://vantagecircle.ghost.io",

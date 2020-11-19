@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-// import { Tags } from '@tryghost/helpers-gatsby'
+import { Tags } from '@tryghost/helpers-gatsby'
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 
 const HeadPost = ({ post }) => {
     const url = `/${post.slug}/`
     const readingTime = readingTimeHelper(post)
-    const tag = `/tag/${post.tags[0].slug}/`
     // console.log(post)
     // console.log(readingTime)
     return (
@@ -22,8 +21,8 @@ const HeadPost = ({ post }) => {
                         </div>
                         <div className="inner col-12">
                             <div className="tags">
-                                {/* <Tags post={post} limit={1} visibility="public" autolink={false} /> */}
-                                <Link to={tag}>{ post.tags[0].name }</Link>
+                                <Tags post={post} limit={1} visibility="public" />
+                                
                             </div>
                             <h2 className="post-title"><a href={url} title={ post.title}> { post.title}</a></h2> 
                             

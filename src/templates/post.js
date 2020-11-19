@@ -14,7 +14,7 @@ import { MetaData } from '../components/common/meta'
 */
 const Post = ({ data, location }) => {
     const post = data.ghostPost
-
+    console.log(data)
     return (
         <>
             <MetaData
@@ -28,7 +28,7 @@ const Post = ({ data, location }) => {
             <Layout>
                 <div className="container">
                     <article className="content">
-                        { post.feature_image ?
+                        { post.feature_image && post.tags[0].slug != 'podcasts'?
                             <figure className="post-feature-image">
                                 <img src={ post.feature_image } alt={ post.title } />
                             </figure> : null }

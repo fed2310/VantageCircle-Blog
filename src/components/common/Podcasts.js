@@ -1,26 +1,37 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-// import { Tags } from '@tryghost/helpers-gatsby'
+import { Tags } from '@tryghost/helpers-gatsby'
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 
 const Podcasts = ({ post }) => {
-    const url = `/${post.slug}/`
+    const url = `/podcasts/${post.slug}/`
+
     const readingTime = readingTimeHelper(post)
-    // console.log(post)
-    // console.log(readingTime)
+    console.log(post)
     return (
-        <div className="main-content" >
-            <section>
-                <div className="container custom-container">
-                    <div className="row">
-                        {posts.map(({ node }) => (
-                            <PostCard key={node.id} post={node} />
-                        ))}
+        <article className="post">
+            <div className="post-inner-content">
+                <div className="img-holder">
+                    <a href={url} className="featured-image" title={ post.title}>
+                        <img className="img-responsive" src={ post.feature_image } alt={ post.title}/>
+                    </a>
+                </div>
+
+                <div className="inner">
+                    {post.tags && <div className="tags"><Tags post={post} limit={1} visibility="public" /></div>}
+                    <h2 className="post-title"><a href={url} title={ post.title }> { post.title }</a></h2> 
+                    <a href={url} className="excerpt" title={ post.title }>
+                        { post.excerpt }
+                    </a>
+                    <div className="readtime_wrapper hidden-sm hidden-xs">
+                        <div className="tags">{ post.updated_at_pretty } &nbsp;&nbsp;|&nbsp;&nbsp;</div>
+                        <div className="readtime">{ readingTime }</div>
                     </div>
                 </div>
-            </section>
-        </div>
+
+            </div>
+        </article>           
     )
 }
 

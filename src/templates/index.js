@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 // import { Tags } from '@tryghost/helpers-gatsby'
-import { Layout, PostCard, HeadPost, Pagination } from '../components/common'
+import { Layout, PostCard, HeadPost, TopPosts, Pagination } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 /**
@@ -14,39 +14,41 @@ import { MetaData } from '../components/common/meta'
 *
 */
 const Index = ({ data, location, pageContext }) => {
-    const headpost = data.allGhostPost.edges
-    const posts = data.allGhostPost.edges.slice(1)
-    console.log(data)
+    // const headpost = data.allGhostPost.edges
+    // const posts = data.allGhostPost.edges.slice(1)
+    const posts = data.allGhostPost.edges
+    console.log(posts)
     return (
         <>
             <MetaData location={location} />
             <Layout isHome={true}>
                 <div className="row">
-                    <HeadPost key={headpost[0].node.id} post={headpost[0].node} />
+                    <HeadPost key={posts[0].node.id} post={posts[0].node} />
 
                     <div className="col-12 col-sm-12 col-md-4 col-lg-4 top-posts">
                         <div className="row">
-                            <div className="popular-posts">Popular Posts</div>
 
-                            
-                            <div className="col-12 item pclr"> 
-                                <article>
-                                    <div className="top-post-details">
-                                        <h2 className="top-post-title">25 Quotes</h2>
-                                        <div className="top-post-tags tags">
-                                            company culture
-                                        </div>
-                                    </div>
-                                </article>
+                            <div className="col-12 pclr">
+                                <div className="popular-posts">Popular Posts</div>
+                                {posts.slice(0,3).map(({ node }) => (
+                                    <TopPosts key={node.id} post={node}/>
+                                ))}
                             </div>
-                            
+
+                            <div className="col-12 pclr">
+                                <div className="popular-posts">Editor's Pick</div>
+                                {posts.slice(0,3).map(({ node }) => (
+                                    <TopPosts key={node.id} post={node}/>
+                                ))}
+                            </div>
 
                         </div>
                     </div>
+                    
                 </div>
 
                 <div className="row loop">
-                    {posts.map(({ node }) => (
+                    {posts.slice(1,4).map(({ node }) => (
                         <div className="col-md-6 col-lg-4 item">
                             <PostCard key={node.id} post={node} />
                         </div>
@@ -54,10 +56,92 @@ const Index = ({ data, location, pageContext }) => {
                 </div>
 
                 <div className="row loop">
+                    <div className="col-12 col-sm-12 col-md-4 col-lg-4">
+                        <div style={{border: "1px solid #333", height: "300px"}}>
+                            <h2>CTA Block</h2>
+                        </div>
+                    </div>
+                    <div className="col-12 col-sm-12 col-md-8 col-lg-8 item pclr">
+                        <div className="col-12 pclr">
+                            <div className="row">
+                                
+                                {posts.slice(4,6).map(({ node }) => (
+                                    <div class="col-md-6 col-lg-6 item">
+                                        <PostCard key={node.id} post={node} />
+                                    </div>
+                                ))}
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row loop">
+                    <div className="col-12 col-sm-12 col-md-8 col-lg-8 item pclr">
+                        <div className="col-12 pclr">
+                            <div className="row">
+                                {posts.slice(6,7).map(({ node }) => (
+                                    <div className="col-md-12 col-lg-12 item">
+                                        <PostCard key={node.id} post={node} />
+                                    </div>
+                                ))}
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-12 col-sm-12 col-md-4 col-lg-4">
+                        <div className="col-12 pclr">
+                            <div style={{border: "1px solid #333", height: "300px"}}>
+                                <h2>CTA Block</h2>
+                            </div>
+                        </div>
+                        <div className="col-12 pclr">
+                            <div style={{border: "1px solid #333", height: "300px"}}>
+                                <h2>CTA Block</h2>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div className="row loop">
+                    <div className="col-12 col-sm-12 col-md-4 col-lg-4">
+                        <div style={{border: "1px solid #333", height: "300px"}}>
+                            <h2>CTA Block</h2>
+                        </div>
+                    </div>
+                    <div className="col-12 col-sm-12 col-md-8 col-lg-8 item pclr">
+                        <div className="col-12 pclr">
+                            <div className="row">
+                                
+                                {posts.slice(7,9).map(({ node }) => (
+                                    <div class="col-md-6 col-lg-6 item">
+                                        <PostCard key={node.id} post={node} />
+                                    </div>
+                                ))}
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row loop">
+                    {posts.slice(9,12).map(({ node }) => (
+                        <div className="col-md-6 col-lg-4 item">
+                            <PostCard key={node.id} post={node} />
+                        </div>
+                    ))}
+                </div>
+
+
+                <div className="row loop">
                     <div className="col-12 pagination-aria">
                         <Pagination pageContext={pageContext} />
                     </div>
                 </div>
+
+                
+
             </Layout>
         </>
     )

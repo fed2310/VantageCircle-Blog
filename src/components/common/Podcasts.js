@@ -10,6 +10,8 @@ const Podcasts = ({ post }) => {
     const readingTime = readingTimeHelper(post)
     console.log(post)
     return (
+        <div className="row">
+                    <div className="col-12">
         <article className="post">
             <div className="post-inner-content">
                 <div className="img-holder">
@@ -31,7 +33,9 @@ const Podcasts = ({ post }) => {
                 </div>
 
             </div>
-        </article>           
+        </article>   
+        </div>
+        </div>        
     )
 }
 

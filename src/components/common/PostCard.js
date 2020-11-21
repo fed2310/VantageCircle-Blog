@@ -25,7 +25,6 @@ const PostCard = ({ post }) => {
                         { post.excerpt }
                     </a>
                     <div className="readtime_wrapper hidden-sm hidden-xs">
-                        <div className="tags">{ post.updated_at_pretty } &nbsp;&nbsp;|&nbsp;&nbsp;</div>
                         <div className="readtime">{ readingTime }</div>
                     </div>
                 </div>
